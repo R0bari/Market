@@ -1,0 +1,19 @@
+.mainScene {
+    position: relative;
+    border: 1px solid black;
+    width: 1300px;
+    height: 900px;
+    margin: 0 auto;
+    background: rgba(200, 200, 200, 0.44);
+    background-image: url(../img/floor-first.png);
+    background-size: cover;
+}
+.character {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background-image: url(../img/model-stepan.png);
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+}
+
