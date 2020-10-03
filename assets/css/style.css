@@ -1,20 +1,9 @@
-.mainScene {
-    position: relative;
-    border: 1px solid black;
-    width: 1300px;
-    height: 900px;
-    margin: 0 auto;
-    background: rgba(200, 200, 200, 0.44);
-    background-image: url(../img/floor-first.png);
-    background-size: cover;
-}
-.character {
-    position: absolute;
-    width: 30px;
-    height: 40px;
-    background-image: url(../img/model-stepan.png);
-    background-repeat:no-repeat;
-    background-size: 100% 100%;
+.floor-table {
+    width: 848px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .floor {
@@ -35,10 +24,10 @@
 }
 
 .first-floor {
-    background-color:  rgba(200, 200, 200, 0.44);
+    background-color:  rgba(200, 200, 200);
 }
 .second-floor {
-    background-color:  rgba(255, 200, 200, 0.44);
+    background-color:  rgba(255, 200, 200);
 }
 
 .cafe {
@@ -46,9 +35,10 @@
     height: 150px;
     border: 2px solid black;
 }
-.cafe:hover {
+/* .cafe:hover {
     background-color: rgb(189, 163, 132);
-}
+    color: black;
+} */
 
 .clothes {
     width: 200px;
@@ -57,6 +47,7 @@
 }
 .clothes:hover {
     background-color: rgb(230, 168, 216);
+    color: black;
 }
 
 .sport {
@@ -66,6 +57,7 @@
 }
 .sport:hover {
     background-color: rgb(157, 240, 255);
+    color: black;
 }
 
 .macdonalds {
@@ -118,7 +110,7 @@
 .switch-button {
     width: 848px;
     height: 60px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     border: 2px solid black;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 700;
