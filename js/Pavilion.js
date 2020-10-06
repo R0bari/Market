@@ -70,23 +70,28 @@ class Pavilion {
         pavilion.style.color = 'transparent';
         pavilion.innerHTML = this.determineInnerText();
         pavilion.style.textAlign = 'center';
-        pavilion.style.fontSize = '20px';
+        pavilion.style.fontSize = '18px';
         pavilion.style.fontWeight = 700;
+        pavilion.style.fontFamily = '-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif';
         pavilion.backGroundColor = this.determineBgColor();
         pavilion.style.border = '2px solid black';
 
-        if (this.entryDirection.indexOf('left') > -1) {
+        if (contains(this.entryDirection, 'left')) {
             pavilion.style.borderLeft = 'none';
         }
-        if (this.entryDirection.indexOf('top') > -1) {
+        if (contains(this.entryDirection, 'top')) {
             pavilion.style.borderTop = 'none';
         }
-        if (this.entryDirection.indexOf('right') > -1) {
+        if (contains(this.entryDirection, 'right')) {
             pavilion.style.borderRight = 'none';
         }
-        if (this.entryDirection.indexOf('bottom') > -1) {
+        if (contains(this.entryDirection, 'bottom')) {
             pavilion.style.borderBottom = 'none';
         }
         return pavilion;
     }
+}
+
+function contains(string, subString) {
+    return (string.indexOf(subString) > -1);
 }
