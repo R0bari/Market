@@ -20,7 +20,7 @@ class Pavilion {
 
     determineFontColor() {
         let currentColor;
-        fontColors.forEach(pair => {
+        PavilionModel.fontColors.forEach(pair => {
             if (this.type === pair.type) {
                 currentColor = pair.color;
             }
@@ -30,7 +30,7 @@ class Pavilion {
 
     determineHoverBgColor() {
         let currentBgColor;
-        backGroundHoverColors.forEach(pair => {
+        PavilionModel.backGroundHoverColors.forEach(pair => {
             if (this.type === pair.type) {
                 currentBgColor = pair.color;
             }
@@ -39,7 +39,7 @@ class Pavilion {
     }
     determineBgColor() {
         let currentBgFloorColor;
-        backGroundFloorColors.forEach(pair => {
+        PavilionModel.backGroundFloorColors.forEach(pair => {
             if (this.type === pair.type) {
                 currentBgFloorColor = pair.color;
             }
@@ -48,7 +48,7 @@ class Pavilion {
     }
     determineInnerText() {
         let currentInnerText;
-        texts.forEach(pair => {
+        PavilionModel.texts.forEach(pair => {
             if (this.type === pair.type) {
                 currentInnerText = pair.text;
             }
@@ -59,8 +59,8 @@ class Pavilion {
     formDOMElement() {
         var pavilion = document.createElement('div');
         pavilion.className = 'pavilion';
-        pavilion.style.left = (floors[this.floorNumber].offsetLeft + this.positionX) + 'px';
-        pavilion.style.top = (floors[this.floorNumber].offsetTop + this.positionY) + 'px';
+        pavilion.style.left = (PavilionModel.floors[this.floorNumber].offsetLeft + this.positionX) + 'px';
+        pavilion.style.top = (PavilionModel.floors[this.floorNumber].offsetTop + this.positionY) + 'px';
         pavilion.style.width = this.width;
         pavilion.style.height = this.height;
         pavilion.style.position = 'absolute';
@@ -95,3 +95,20 @@ class Pavilion {
 function contains(string, subString) {
     return (string.indexOf(subString) > -1);
 }
+
+shops = [
+    new Pavilion('cafe', 0, 0, 0, '150px', '150px', 'bottom'),
+    new Pavilion('sport', 0, 0, 200, '150px', '370px', 'right'),
+    new Pavilion('clothes', 0, 200, 420, '150px', '150px', 'top'),
+    new Pavilion('macdonalds', 0, 200, 000, '300px', '300px', 'bottom right'),
+    new Pavilion('kfc', 0, 549, 000, '300px', '300px', 'bottom left'),
+    new Pavilion('clothes', 0, 649, 370, '200px', '200px', 'top'),
+    new Pavilion('cafe', 0, 400, 370, '220px', '200px', 'top'),
+
+    new Pavilion('sport', 1, 0, 0, '150px', '370px', 'right'),
+    new Pavilion('cafe', 1, 0, 420, '150px', '150px', 'top'),
+    new Pavilion('clothes', 1, 699, 0, '150px', '200px', 'left'),
+    new Pavilion('macdonalds', 1, 200, 270, '300px', '300px', 'top right'),
+    new Pavilion('kfc', 1, 549, 270, '300px', '300px', 'top'),
+    new Pavilion('cafe', 1, 200, 0, '350px', '100px', 'bottom')
+];

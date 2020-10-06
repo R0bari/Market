@@ -1,24 +1,15 @@
-function render() {
-    floorTable.innerHTML = 'Floor ' + (currentFloorNumber+1);
+const marketView = new MarketView();
 
-    const pavilions = document.querySelectorAll('.pavilion');
-    pavilions.forEach(pavilion => {
-        document.body.removeChild(pavilion);
-    });
-
-    shops.forEach(shop => {
-        if (shop.floorNumber === currentFloorNumber) {
-            var pavilion = shop.formDOMElement();
-        
-            pavilion.addEventListener("mouseover", (event) => {
-                event.target.style.color = shop.fontColor;
-                event.target.style.backgroundColor = shop.hoverBackGroundColor;
-            });
-            pavilion.addEventListener("mouseout", (event) => {
-                event.target.style.color = 'transparent';
-                event.target.style.backgroundColor = backGroundFloorColors[currentFloorNumber];
-            })
-            document.body.appendChild(pavilion);
+PavilionModel.switchButton.addEventListener("click", function() {
+    PavilionModel.currentFloorNumber = (PavilionModel.currentFloorNumber + 1) % PavilionModel.floors.length;
+    PavilionModel.floors.forEach((floor, i) => {
+        if (i !== PavilionModel.currentFloorNumber) {
+            floor.style.display = 'none';
+        } else {
+            floor.style.display = 'block';
         }
     });
-}
+    marketView.render();
+});
+
+marketView.render();
