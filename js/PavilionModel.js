@@ -1,4 +1,5 @@
 types = [ 'cafe', 'clothes', 'sport', 'macdonalds', 'kfc', 'burger-king' ];
+
 fontColors = [
     { type: 'cafe', color: 'black' },
     { type: 'clothes', color: 'black' },
@@ -7,10 +8,12 @@ fontColors = [
     { type: 'kfc', color: 'white' },
     { type: 'burger-king', color: 'rgb(218, 153, 33)'}
 ];
+
 backGroundFloorColors = [
     'rgb(200, 200, 200)',
     'rgba(255, 200, 200)'
 ];
+
 backGroundHoverColors = [
     { type: 'cafe', color: 'rgb(189, 163, 132)' },
     { type: 'clothes', color: 'rgb(230, 168, 216)' },
@@ -20,72 +23,33 @@ backGroundHoverColors = [
     { type: 'burger-king', color: 'rgb(65, 67, 230)' }
 ]
 
-class Pavilion {
-    element;
-    fontColor;    
-    type;
-    backGroundColor;
-    hoverBackGroundColor;
+texts = [
+    { type: 'cafe', text: 'Clothes.</br>Here you can buy any stylish staff you need.' },
+    { type: 'clothes', text: 'Clothes.</br>Here you can buy any stylish staff you need.' },
+    { type: 'sport', text: 'Sport.</br>Basketball, Volleyball, Football - nevermind. We hate everything! Let\'s just get drunk together!' },
+    { type: 'macdonalds', text: 'Macdonalds</br>We hate chickens. That\'s why we cook them for you. Bless you before the big lunch!' },
+    { type: 'kfc', text: 'KFC.</br>Sanders already here! Get prepared for our uber-mega-spicy fresh chicken-meet!' },
+    { type: 'burger-king', text: 'Burger King.</br>English, friend.</br>Do you speak it?</br>I dare, I double dare you!' }
+]
 
-    constructor(elem) {
-        this.element = elem;
-        this.type = this.determineType();
-        this.hoverBackGroundColor = this.determineHoverBgColor();
-        this.backGroundColor = backGroundFloorColors[0];
-        this.fontColor = this.determineFontColor();
-    }
+floors = [
+    document.querySelector('.first-floor'),
+    document.querySelector('.second-floor')
+]
 
-    addEventListeners() {
-        this.element.addEventListener("mouseover", (event) => {
-            event.target.style.color = this.fontColor;
-            event.target.style.backgroundColor = this.hoverBackGroundColor;
-        });
-        this.element.addEventListener("mouseout", (event) => {
-            event.target.style.color = 'transparent';
-            event.target.style.backgroundColor = backGroundFloorColors[currentFloorNumber];
-        });
-    }
+shops = [
+    new Pavilion('cafe', 0, 0, 0, '150px', '150px', 'bottom'),
+    new Pavilion('sport', 0, 0, 200, '150px', '370px', 'right'),
+    new Pavilion('clothes', 0, 200, 420, '150px', '150px', 'top'),
+    new Pavilion('macdonalds', 0, 200, 000, '300px', '300px', 'bottom right'),
+    new Pavilion('kfc', 0, 549, 000, '300px', '300px', 'bottom left'),
+    new Pavilion('clothes', 0, 649, 370, '200px', '200px', 'top'),
+    new Pavilion('cafe', 0, 400, 370, '220px', '200px', 'top'),
 
-    determineFontColor() {
-        let currentColor;
-        fontColors.forEach(pair => {
-            if (this.type === pair.type) {
-                currentColor = pair.color;
-            }
-
-        });
-        return currentColor;
-    }
-    determineType() {
-        let currentType;
-        types.forEach(type => {
-            if (hasClass(this.element, type)) {
-                currentType = type;
-            }
-        });
-        return currentType;
-    }
-    determineHoverBgColor() {
-        let currentBgColor;
-        backGroundHoverColors.forEach(pair => {
-            if (this.type === pair.type) {
-                currentBgColor = pair.color;
-            }
-        });
-        return currentBgColor;
-    }
-    determineBgColor() {
-        let currentBgFloorColor;
-        backGroundFloorColors.forEach(color => {
-            if (this.type === pair.type) {
-                currentBgFloorColor = pair.color;
-            }
-        });
-        return currentBgFloorColor;
-    }
-}
-
-function hasClass(element, className) {
-    var rx = new RegExp('(?:^| )' + className + '(?: |$)');
-    return rx.test(element.className);
-}
+    new Pavilion('sport', 1, 0, 0, '150px', '370px', 'right'),
+    new Pavilion('cafe', 1, 0, 420, '150px', '150px', 'top'),
+    new Pavilion('clothes', 1, 699, 0, '150px', '200px', 'left'),
+    new Pavilion('macdonalds', 1, 200, 270, '300px', '300px', 'top right'),
+    new Pavilion('kfc', 1, 549, 270, '300px', '300px', 'top'),
+    new Pavilion('cafe', 1, 200, 0, '350px', '100px', 'bottom')
+];

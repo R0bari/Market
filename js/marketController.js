@@ -1,18 +1,24 @@
-var Controller = function (View, Model) {
-    this.marketView = View;
-    this.characterModel = Model;
-};
-Controller.prototype.init = function () {
-    this.marketView.onKeyDownEvent = this.moving.bind(this);
-    this.marketView.init();
-    this.characterModel.init(this.needRendering.bind(this));
-    this.needRendering();
-};
-Controller.prototype.moving = function (e) {
-    this.characterModel.characterMove(e);
-};
-Controller.prototype.needRendering = function () {
-    this.marketView.render(characterModel.objs);
-};
-var marketController = new Controller(marketView, characterModel);
-marketController.init();
+function render() {
+    floorTable.innerHTML = 'Floor ' + (currentFloorNumber+1);
+
+    const pavilions = document.querySelectorAll('.pavilion');
+    pavilions.forEach(pavilion => {
+        document.body.removeChild(pavilion);
+    });
+
+    shops.forEach(shop => {
+        if (shop.floorNumber === currentFloorNumber) {
+            var pavilion = shop.formDOMElement();
+        
+            pavilion.addEventListener("mouseover", (event) => {
+                event.target.style.color = shop.fontColor;
+                event.target.style.backgroundColor = shop.hoverBackGroundColor;
+            });
+            pavilion.addEventListener("mouseout", (event) => {
+                event.target.style.color = 'transparent';
+                event.target.style.backgroundColor = backGroundFloorColors[currentFloorNumber];
+            })
+            document.body.appendChild(pavilion);
+        }
+    });
+}
