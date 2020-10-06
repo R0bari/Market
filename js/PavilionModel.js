@@ -32,6 +32,10 @@ texts = [
     { type: 'burger-king', text: 'Burger King.</br>English, friend.</br>Do you speak it?</br>I dare, I double dare you!' }
 ]
 
+const switchButton = document.querySelector('.switch-button');
+
+const floorTable = document.querySelector('.floor-table');
+
 floors = [
     document.querySelector('.first-floor'),
     document.querySelector('.second-floor')

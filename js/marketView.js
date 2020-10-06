@@ -1,7 +1,3 @@
-const floorTable = document.querySelector('.floor-table');
-const floors = document.querySelectorAll('.floor');
-const writings = document.querySelectorAll('.writing');
-const switchButton = document.querySelector('.switch-button');
 let currentFloorNumber = 0;
 const pavilions = [];
 
