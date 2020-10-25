@@ -25,12 +25,12 @@ class PavilionModel {
     ]
     
     static texts = [
-        { type: 'cafe', text: 'Clothes.</br>Here you can buy any stylish staff you need.' },
-        { type: 'clothes', text: 'Clothes.</br>Here you can buy any stylish staff you need.' },
-        { type: 'sport', text: 'Sport.</br>Basketball, Volleyball, Football - nevermind. We hate everything! Let\'s just get drunk together!' },
-        { type: 'macdonalds', text: 'Macdonalds</br>We hate chickens. That\'s why we cook them for you. Bless you before the big lunch!' },
-        { type: 'kfc', text: 'KFC.</br>Sanders already here! Get prepared for our uber-mega-spicy fresh chicken-meet!' },
-        { type: 'burger-king', text: 'Burger King.</br>English, friend.</br>Do you speak it?</br>I dare, I double dare you!' }
+        { type: 'cafe', text: 'Clothes. Here you can buy any stylish staff you need.' },
+        { type: 'clothes', text: 'Clothes. Here you can buy any stylish staff you need.' },
+        { type: 'sport', text: 'Sport. Basketball, Volleyball, Football - nevermind. We hate everything! Let\'s just get drunk together!' },
+        { type: 'macdonalds', text: 'Macdonalds We hate chickens. That\'s why we cook them for you. Bless you before the big lunch!' },
+        { type: 'kfc', text: 'KFC. Sanders already here! Get prepared for our uber-mega-spicy fresh chicken-meet!' },
+        { type: 'burger-king', text: 'Burger King. English, friend. Do you speak it? I dare, I double dare you!' }
     ]
     
     static switchButton = document.querySelector('.switch-button');

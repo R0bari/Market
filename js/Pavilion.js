@@ -15,6 +15,7 @@ class Pavilion {
         this.height = height;
         this.hoverBackGroundColor = this.determineHoverBgColor();
         this.fontColor = this.determineFontColor();
+        this.text = this.determineInnerText();
         this.entryDirection = entryDirection;
     }
 
@@ -56,39 +57,52 @@ class Pavilion {
         return currentInnerText;
     }
 
-    formDOMElement() {
-        var pavilion = document.createElement('div');
-        pavilion.className = 'pavilion';
-        pavilion.style.left = (PavilionModel.floors[this.floorNumber].offsetLeft + this.positionX) + 'px';
-        pavilion.style.top = (PavilionModel.floors[this.floorNumber].offsetTop + this.positionY) + 'px';
-        pavilion.style.width = this.width;
-        pavilion.style.height = this.height;
-        pavilion.style.position = 'absolute';
-        pavilion.style.verticalAlign = 'auto';
-        pavilion.style.padding = '20px';
-        pavilion.style.boxSizing = 'border-box';
-        pavilion.style.color = 'transparent';
-        pavilion.innerHTML = this.determineInnerText();
-        pavilion.style.textAlign = 'center';
-        pavilion.style.fontSize = '18px';
-        pavilion.style.fontWeight = 700;
-        pavilion.style.fontFamily = '-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif';
-        pavilion.backGroundColor = this.determineBgColor();
-        pavilion.style.border = '2px solid black';
-
+    formDOMElement(canvas) {
+        var ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(
+            this.positionX,
+            this.positionY,
+            this.width,
+            this.height
+        );
+        
         if (contains(this.entryDirection, 'left')) {
-            pavilion.style.borderLeft = 'none';
+            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
+            ctx.fillRect(
+                this.positionX - 2,
+                this.positionY + this.height / 2 - 25,
+                4,
+                50
+            )
         }
         if (contains(this.entryDirection, 'top')) {
-            pavilion.style.borderTop = 'none';
+            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
+            ctx.fillRect(
+                this.positionX + this.width / 2 - 25,
+                this.positionY - 2,
+                50,
+                4
+            )
         }
         if (contains(this.entryDirection, 'right')) {
-            pavilion.style.borderRight = 'none';
+            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
+            ctx.fillRect(
+                this.positionX + this.width - 2,
+                this.positionY + this.height / 2 - 25,
+                4,
+                50
+            )
         }
         if (contains(this.entryDirection, 'bottom')) {
-            pavilion.style.borderBottom = 'none';
+            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
+            ctx.fillRect(
+                this.positionX + this.width / 2 - 25,
+                this.positionY + this.height - 2,
+                50,
+                4
+            )
         }
-        return pavilion;
     }
 }
 
@@ -97,18 +111,18 @@ function contains(string, subString) {
 }
 
 shops = [
-    new Pavilion('cafe', 0, 0, 0, '150px', '150px', 'bottom'),
-    new Pavilion('sport', 0, 0, 200, '150px', '370px', 'right'),
-    new Pavilion('clothes', 0, 200, 420, '150px', '150px', 'top'),
-    new Pavilion('macdonalds', 0, 200, 000, '300px', '300px', 'bottom right'),
-    new Pavilion('kfc', 0, 549, 000, '300px', '300px', 'bottom left'),
-    new Pavilion('clothes', 0, 649, 370, '200px', '200px', 'top'),
-    new Pavilion('cafe', 0, 400, 370, '220px', '200px', 'top'),
+    new Pavilion('cafe', 0, 0, 0, 150, 150, 'bottom'),
+    new Pavilion('sport', 0, 0, 200, 150, 370, 'right'),
+    new Pavilion('clothes', 0, 200, 420, 150, 150, 'top'),
+    new Pavilion('macdonalds', 0, 200, 000, 300, 300, 'bottom right'),
+    new Pavilion('kfc', 0, 549, 000, 300, 300, 'bottom left'),
+    new Pavilion('clothes', 0, 649, 370, 200, 200, 'top'),
+    new Pavilion('cafe', 0, 400, 370, 220, 200, 'top'),
 
-    new Pavilion('sport', 1, 0, 0, '150px', '370px', 'right'),
-    new Pavilion('cafe', 1, 0, 420, '150px', '150px', 'top'),
-    new Pavilion('clothes', 1, 699, 0, '150px', '200px', 'left'),
-    new Pavilion('macdonalds', 1, 200, 270, '300px', '300px', 'top right'),
-    new Pavilion('kfc', 1, 549, 270, '300px', '300px', 'top'),
-    new Pavilion('cafe', 1, 200, 0, '350px', '100px', 'bottom')
+    new Pavilion('sport', 1, 0, 0, 150, 370, 'right'),
+    new Pavilion('cafe', 1, 0, 420, 150, 150, 'top'),
+    new Pavilion('clothes', 1, 699, 0, 150, 200, 'left'),
+    new Pavilion('macdonalds', 1, 200, 270, 300, 300, 'top right'),
+    new Pavilion('kfc', 1, 549, 270, 300, 300, 'top'),
+    new Pavilion('cafe', 1, 200, 0, 350, 100, 'bottom')
 ];
