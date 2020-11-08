@@ -57,51 +57,33 @@ class Pavilion {
         return currentInnerText;
     }
 
-    formDOMElement(canvas) {
-        var ctx = canvas.getContext('2d');
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(
-            this.positionX,
-            this.positionY,
-            this.width,
-            this.height
-        );
+    formDOMElement() {
+        var pavilion = document.createElement('svg');
+        pavilion.setAttribute('viewBox', '0 0 ' + this.width + ' ' + this.height);
+        pavilion.setAttribute('width', this.width);
+        pavilion.setAttribute('height', this.height);
+        pavilion.className = 'pavilion';
+        pavilion.style.left = (PavilionModel.floors[this.floorNumber].offsetLeft + this.positionX) + 'px';
+        pavilion.style.top = (PavilionModel.floors[this.floorNumber].offsetTop + this.positionY) + 'px';
+        // pavilion.style.border = '2px solid black';
+
+        pavilion.appendChild(formLine(0, this.width, 0, 0));  //  top
+        pavilion.appendChild(formLine(this.width, this.width, 0, this.height));    //  right   
+        pavilion.appendChild(formLine(0,  this.width, this.height, this.height));    //  bottom
+        pavilion.appendChild(formLine(0, 0, 0, this.height));    //  left
+        return pavilion;
         
-        if (contains(this.entryDirection, 'left')) {
-            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
-            ctx.fillRect(
-                this.positionX - 2,
-                this.positionY + this.height / 2 - 25,
-                4,
-                50
-            )
-        }
-        if (contains(this.entryDirection, 'top')) {
-            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
-            ctx.fillRect(
-                this.positionX + this.width / 2 - 25,
-                this.positionY - 2,
-                50,
-                4
-            )
-        }
-        if (contains(this.entryDirection, 'right')) {
-            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
-            ctx.fillRect(
-                this.positionX + this.width - 2,
-                this.positionY + this.height / 2 - 25,
-                4,
-                50
-            )
-        }
-        if (contains(this.entryDirection, 'bottom')) {
-            ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
-            ctx.fillRect(
-                this.positionX + this.width / 2 - 25,
-                this.positionY + this.height - 2,
-                50,
-                4
-            )
+        function formLine(x1, x2, y1, y2) {
+
+            var line = document.createElement('line');
+            line.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            line.setAttribute('x1', x1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y1', y1);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke', 'rgb(0,0,0)');
+            line.setAttribute('stroke-width', 4);
+            return line;
         }
     }
 }
