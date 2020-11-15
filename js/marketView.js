@@ -11,7 +11,7 @@ class MarketView {
             }
         });
 
-        renderPage();
+        //renderPage();
 
         function clearField() {
             const pavilions = document.querySelectorAll('.pavilion');

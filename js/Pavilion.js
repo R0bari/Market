@@ -2,6 +2,7 @@ class Pavilion {
     fontColor;    
     type;
     hoverBackGroundColor;
+    borderWidth = 3;
     positionX; positionY; width; height;
     floorNumber;
     entryDirection; //  'top', 'left', 'right', 'bottom'
@@ -39,13 +40,7 @@ class Pavilion {
         return currentBgColor;
     }
     determineBgColor() {
-        let currentBgFloorColor;
-        PavilionModel.backGroundFloorColors.forEach(pair => {
-            if (this.type === pair.type) {
-                currentBgFloorColor = pair.color;
-            }
-        });
-        return currentBgFloorColor;
+        return PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
     }
     determineInnerText() {
         let currentInnerText;
@@ -67,12 +62,21 @@ class Pavilion {
         pavilion.style.top = (PavilionModel.floors[this.floorNumber].offsetTop + this.positionY) + 'px';
         // pavilion.style.border = '2px solid black';
 
-        pavilion.appendChild(formLine(0, this.width, 0, 0));  //  top
-        pavilion.appendChild(formLine(this.width, this.width, 0, this.height));    //  right   
-        pavilion.appendChild(formLine(0,  this.width, this.height, this.height));    //  bottom
-        pavilion.appendChild(formLine(0, 0, 0, this.height));    //  left
+        pavilion.appendChild(formRect(0, 0, this.width, this.height, 'black', this.determineBgColor(), this.borderWidth));        
         return pavilion;
         
+        function formRect(top, left, width, height, borderColor, bgColor, strokeWidth) {
+            var rect = document.createElement('rect');
+            rect.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            rect.setAttribute('x', left);
+            rect.setAttribute('y', top);
+            rect.setAttribute('width', width);
+            rect.setAttribute('height', height);
+            rect.setAttribute('stroke', borderColor);
+            rect.style.fill = bgColor;
+            rect.style.strokeWidth = strokeWidth;
+            return rect;
+        }
         function formLine(x1, x2, y1, y2) {
 
             var line = document.createElement('line');
