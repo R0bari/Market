@@ -7,72 +7,51 @@ class MarketView {
         shops.forEach(shop => {
             if (shop.floorNumber === PavilionModel.currentFloorNumber) {
                 const pavilion = shop.formDOMElement();
-                PavilionModel.floors[shop.floorNumber].appendChild(pavilion);
+                pavilion.addEventListener("mousedown", drawHoveredShop);
+                pavilion.addEventListener("mouseup", drawUnhoveredShop);
+                PavilionModel.floors[shop.floorNumber].append(pavilion);
             }
         });
-
-        //renderPage();
-
-        function clearField() {
-            const pavilions = document.querySelectorAll('.pavilion');
-            
-            pavilions.forEach(pavilion => {
-                    PavilionModel.floors[PavilionModel.currentFloorNumber - 1 >= 0 
-                        ? PavilionModel.currentFloorNumber - 1 
-                        : PavilionModel.floors.length - 1].removeChild(pavilion);
-            });
-        }
-        function renderPage() {
-            PavilionModel.floors[PavilionModel.currentFloorNumber].style.display = 'none';
-            PavilionModel.floors[PavilionModel.currentFloorNumber].style.display = 'block';
-        }
     }
 }
 
-function drawHoveredShop(canvas, shop) {
-    // var ctx = canvas.getContext('2d');
-    // ctx.fillStyle = shop.hoverBackGroundColor;
-    // ctx.fillRect(
-    //     shop.positionX, 
-    //     shop.positionY, 
-    //     shop.width, 
-    //     shop.height
-    // );
-    // ctx.fillStyle = shop.fontColor;
-    // ctx.strokeStyle = "#F00";
-    // ctx.font = "14pt Roboto";
-    // wrapText(ctx, shop.text, shop.positionX + 10, shop.positionY + 20, shop.width - 10 * 2, 20);
+function clearField() {
+    const pavilions = document.querySelectorAll('.pavilion');
     
-    // function wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight)
-    // {
-    //     var words = text.split(" ");
-    //     var countWords = words.length;
-    //     var line = "";
-    //     for (var n = 0; n < countWords; n++) {
-    //         var testLine = line + words[n] + " ";
-    //         var testWidth = context.measureText(testLine).width;
-    //         if (testWidth > maxWidth) {
-    //             context.fillText(line, marginLeft, marginTop);
-    //             line = words[n] + " ";
-    //             marginTop += lineHeight;
-    //         }
-    //         else {
-    //             line = testLine;
-    //         }
-    //     }
-    //     context.fillText(line, marginLeft, marginTop);
-    // }
+    pavilions.forEach(pavilion => {
+            PavilionModel.floors[PavilionModel.currentFloorNumber - 1 >= 0 
+                ? PavilionModel.currentFloorNumber - 1 
+                : PavilionModel.floors.length - 1].removeChild(pavilion);
+    });
 }
 
-function drawUnhoveredShop(canvas, shop) {
-    // var ctx = canvas.getContext('2d');
-    // ctx.fillStyle = PavilionModel.backGroundFloorColors[PavilionModel.currentFloorNumber];
-    // ctx.fillRect(
-    //     shop.positionX, 
-    //     shop.positionY, 
-    //     shop.width, 
-    //     shop.height
-    // );
+function drawHoveredShop(pavilion) {
+    var currentPavilion = pavilion.currentTarget;
+    var currentShop;
+    shops.forEach(shop => {
+        if (currentPavilion.style.left === (PavilionModel.floors[shop.floorNumber].offsetLeft + shop.positionX) + 'px' &&
+        currentPavilion.style.top === (PavilionModel.floors[shop.floorNumber].offsetTop + shop.positionY) + 'px') {
+            currentShop = shop;
+        }
+    });
+    currentPavilion.removeChild(currentPavilion.lastChild);
+    currentPavilion.append(currentShop.formRect(0, 0, currentShop.width, currentShop.height, 
+        'black', currentShop.determineHoverBgColor(), currentShop.borderWidth));
+    currentShop.formText(currentPavilion);
+}
+
+function drawUnhoveredShop(pavilion) {
+    var currentPavilion = pavilion.currentTarget;
+    var currentShop;
+    shops.forEach(shop => {
+        if (currentPavilion.style.left === (PavilionModel.floors[shop.floorNumber].offsetLeft + shop.positionX) + 'px' &&
+        currentPavilion.style.top === (PavilionModel.floors[shop.floorNumber].offsetTop + shop.positionY) + 'px') {
+            currentShop = shop;
+        }
+    });
+    currentPavilion.removeChild(currentPavilion.lastChild);
+    currentPavilion.append(currentShop.formRect(0, 0, currentShop.width, currentShop.height, 
+        'black', currentShop.determineBgColor(), currentShop.borderWidth));
 }
 
 function changeFloor() {

@@ -6,6 +6,7 @@ class Pavilion {
     positionX; positionY; width; height;
     floorNumber;
     entryDirection; //  'top', 'left', 'right', 'bottom'
+    xmlns = "http://www.w3.org/2000/svg";
 
     constructor(type, flofloorNumberor, positionX, positionY, width, height, entryDirection) {
         this.type = type;
@@ -53,41 +54,66 @@ class Pavilion {
     }
 
     formDOMElement() {
-        var pavilion = document.createElement('svg');
+        var pavilion = document.createElementNS(this.xmlns, 'svg');
         pavilion.setAttribute('viewBox', '0 0 ' + this.width + ' ' + this.height);
         pavilion.setAttribute('width', this.width);
         pavilion.setAttribute('height', this.height);
-        pavilion.className = 'pavilion';
+        pavilion.classList.add('pavilion');
         pavilion.style.left = (PavilionModel.floors[this.floorNumber].offsetLeft + this.positionX) + 'px';
         pavilion.style.top = (PavilionModel.floors[this.floorNumber].offsetTop + this.positionY) + 'px';
-        // pavilion.style.border = '2px solid black';
+     
+        pavilion.append(this.formRect(0, 0, this.width, this.height, 'black', this.determineBgColor(), this.borderWidth));        
+        return pavilion;                
+    }
+    
+    formRect(top, left, width, height, borderColor, bgColor, strokeWidth) {
+        var rect = document.createElementNS(this.xmlns, 'rect');
+        rect.setAttribute('x', left);
+        rect.setAttribute('y', top);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
+        rect.setAttribute('stroke', borderColor);
+        rect.style.fill = bgColor;
+        rect.style.strokeWidth = strokeWidth;
+        return rect;
+    }
 
-        pavilion.appendChild(formRect(0, 0, this.width, this.height, 'black', this.determineBgColor(), this.borderWidth));        
-        return pavilion;
-        
-        function formRect(top, left, width, height, borderColor, bgColor, strokeWidth) {
-            var rect = document.createElement('rect');
-            rect.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            rect.setAttribute('x', left);
-            rect.setAttribute('y', top);
-            rect.setAttribute('width', width);
-            rect.setAttribute('height', height);
-            rect.setAttribute('stroke', borderColor);
-            rect.style.fill = bgColor;
-            rect.style.strokeWidth = strokeWidth;
-            return rect;
+    formText(element) {
+        wrapText(this, element, this.determineInnerText(), 30, 30, this.width / 12, 25);
+
+        function wrapText(context, domElement, text, marginLeft, marginTop, maxSymbolsInLine, lineHeight)
+        {
+            var words = text.split(" ");
+            var countWords = words.length;
+            var line = "";
+            var textWidth = 0;
+            for (var n = 0; n < countWords; n++) {
+                var testLine = line + words[n] + " ";
+                textWidth = testLine.length;
+                if (textWidth > maxSymbolsInLine || n === countWords - 1) {
+                    if (n === countWords - 1) {
+                        line += words[countWords - 1];
+                    }
+                    domElement.append(createText(context, line, marginTop, marginLeft));
+                    line = words[n] + " ";
+                    marginTop += lineHeight;
+                    textWidth = 0;
+                }
+                else {
+                    line = testLine;
+                }
+            }
+            
         }
-        function formLine(x1, x2, y1, y2) {
-
-            var line = document.createElement('line');
-            line.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            line.setAttribute('x1', x1);
-            line.setAttribute('x2', x2);
-            line.setAttribute('y1', y1);
-            line.setAttribute('y2', y2);
-            line.setAttribute('stroke', 'rgb(0,0,0)');
-            line.setAttribute('stroke-width', 4);
-            return line;
+        function createText(context, text, top, left) {
+            var newtext = document.createElementNS(context.xmlns, 'text');
+            newtext.setAttribute('x', left);
+            newtext.setAttribute('y', top);
+            newtext.setAttribute('font-size', 20);
+            newtext.setAttribute('stroke', context.determineFontColor());
+            newtext.setAttribute('fill', context.determineFontColor());
+            newtext.innerHTML = text;
+            return newtext;
         }
     }
 }

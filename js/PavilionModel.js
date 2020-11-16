@@ -25,7 +25,7 @@ class PavilionModel {
     ]
     
     static texts = [
-        { type: 'cafe', text: 'Clothes. Here you can buy any stylish staff you need.' },
+        { type: 'cafe', text: 'Cafe. Here you can drink some tea or coffee.' },
         { type: 'clothes', text: 'Clothes. Here you can buy any stylish staff you need.' },
         { type: 'sport', text: 'Sport. Basketball, Volleyball, Football - nevermind. We hate everything! Let\'s just get drunk together!' },
         { type: 'macdonalds', text: 'Macdonalds We hate chickens. That\'s why we cook them for you. Bless you before the big lunch!' },
